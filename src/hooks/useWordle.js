@@ -9,9 +9,33 @@ const useWordle = (solution) => {
 
   const formatGuess = () => {
     console.log("Word formatting in Progress");
+    const solutionArray = [...solution];
+    const formattedGuess = [...currentGuess].map((letter) => {
+      return { key: letter, color: "grey" };
+    });
+    // console.log(formattedGuess);
+
+    //SET CORRECTLY PLACED LETTER COLOR TO GREEN
+    formattedGuess.forEach((letter, i) => {
+      if (letter.key === solutionArray[i]) {
+        letter.color = "green";
+        solutionArray[i] = null;
+      }
+    });
+    console.log(formattedGuess);
+
+    //SET THE INCLUSIVE LETTER COLOR TO YELLOW
+
+    formattedGuess.forEach((letter, i) => {
+      if (solutionArray.includes(letter.key) && letter.color !== "green") {
+        formattedGuess[i].color = "yellow";
+        solutionArray[solutionArray.indexOf(letter.key)] = null;
+      }
+    });
   };
 
   const addNewGuess = () => {};
+
   const handleKeyUp = ({ key }) => {
     if (key === "Enter") {
       //if the number of turn is not grater than 6
@@ -28,6 +52,7 @@ const useWordle = (solution) => {
       if (currentGuess.length !== 5) {
         console.log("Word should have 5 characters");
       }
+
       formatGuess();
     }
 
