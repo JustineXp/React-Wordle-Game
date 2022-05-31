@@ -5,13 +5,14 @@ import Wordle from "./components/Wordle";
 
 function App() {
   const [solution, setSolution] = useState(null);
+
   useEffect(() => {
     fetch("http://localhost:3001/solutions")
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
         let random = Math.floor(Math.random() * json.length);
-        console.log(json[random]);
+        // console.log(json[random]);
         setSolution(json[random].word);
       });
   }, [setSolution]);
