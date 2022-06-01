@@ -1,19 +1,21 @@
 import { useState } from "react";
 
 const useWordle = (solution) => {
+  //STATES
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, setGuesses] = useState([...Array(6)]);
   const [history, setHistory] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
 
+  //FORMATTING THE GUESS INTO AN OBJECT
+
   const formatGuess = () => {
-    console.log("Word formatting in Progress");
+    // console.log("Word formatting in Progress");
     const solutionArray = [...solution];
     const formattedGuess = [...currentGuess].map((letter) => {
       return { key: letter, color: "grey" };
     });
-    // console.log(formattedGuess);
 
     //SET CORRECTLY PLACED LETTER COLOR TO GREEN
     formattedGuess.forEach((letter, i) => {
@@ -22,7 +24,6 @@ const useWordle = (solution) => {
         solutionArray[i] = null;
       }
     });
-    console.log(formattedGuess);
 
     //SET THE INCLUSIVE LETTER COLOR TO YELLOW
 
@@ -32,7 +33,11 @@ const useWordle = (solution) => {
         solutionArray[solutionArray.indexOf(letter.key)] = null;
       }
     });
+
+    return formattedGuess;
   };
+
+  //ADDING THE FORMATTED GUESS TO THE GUESSES ARRAT
 
   const addNewGuess = (formattedGuess) => {
     if (currentGuess === solution) {
@@ -56,10 +61,15 @@ const useWordle = (solution) => {
     setCurrentGuess("");
   };
 
+  console.log(guesses);
+
+  // THE LOGIC THAT TAKE PLACE WHEN ENTER KEY IS PRESSED
+
   const handleKeyUp = ({ key }) => {
     if (key === "Enter") {
       //if the number of turn is not grater than 6
       if (turn > 5) {
+        setCurrentGuess("");
         console.log("Guesses Depleted.");
         return;
       }
@@ -73,7 +83,9 @@ const useWordle = (solution) => {
         console.log("Word should have 5 characters");
       }
 
-      formatGuess();
+      let formatted = formatGuess();
+      console.log(formatted);
+      addNewGuess(formatted);
     }
 
     if (key === "Backspace") {

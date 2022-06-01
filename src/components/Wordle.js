@@ -13,9 +13,14 @@ export default function Wordle({ solution }) {
     };
   }, [handleKeyUp]);
 
+  // useEffect(() => {
+  //   console.log(guesses, turn, isCorrect);
+  // }, [guesses, isCorrect, turn]);
+
   return (
     <div>
       Wordle : {currentGuess}
+      {turn > 5 && <div>Your Guesses have been Depleted</div>}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>
   );
