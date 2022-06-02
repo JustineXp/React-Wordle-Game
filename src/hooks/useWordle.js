@@ -81,6 +81,8 @@ const useWordle = (solution) => {
       //check for length of the word
       if (currentGuess.length !== 5) {
         console.log("Word should have 5 characters");
+        // setCurrentGuess("");
+        return;
       }
 
       let formatted = formatGuess();
@@ -88,7 +90,7 @@ const useWordle = (solution) => {
       addNewGuess(formatted);
     }
 
-    if (key === "Backspace") {
+    if (key === "Backspace" || key === "Delete") {
       //   console.log(key);
       setCurrentGuess((prev) => {
         return prev.slice(0, -1);
