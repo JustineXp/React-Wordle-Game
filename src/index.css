@@ -1,7 +1,7 @@
 body {
   text-align: center;
   font-size: 1em;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif, Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
 }
 h1 {
@@ -75,8 +75,24 @@ h1 {
   height: 50px;
   background: #eee;
   display: inline-block;
-  border-radius: 6px;
+  border-radius: 3px;
   line-height: 50px;
+}
+
+.keypad > div.green {
+  background: #5ac85a;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.keypad > div.yellow {
+  background: #e2cc68;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.keypad > div.grey {
+  background: #a1a1a1;
+  color: #fff;
+  transition: all 0.3s ease-in;
 }
 
 @keyframes flip {

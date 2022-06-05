@@ -5,7 +5,7 @@ import Keypad from "./Keypad";
 
 export default function Wordle({ solution }) {
   const [message, setMessage] = useState(null);
-  const { currentGuess, handleKeyUp, guesses, turn, isCorrect } =
+  const { currentGuess, handleKeyUp, guesses, usedKeys, turn, isCorrect } =
     useWordle(solution);
 
   let word = solution.toLocaleUpperCase();
@@ -26,7 +26,7 @@ export default function Wordle({ solution }) {
       {/* Wordle : {currentGuess} */}
       {turn > 5 && <p>WORD : {word}</p>}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
-      <Keypad />
+      <Keypad keys={usedKeys} />
     </div>
   );
 }
