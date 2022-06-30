@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import "./App.css";
+import Header from "./components/Header";
 import Wordle from "./components/Wordle";
 
 function App() {
   const [solution, setSolution] = useState(null);
+  const [solutionArray, setSolutionArray] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/solutions")
@@ -13,14 +15,17 @@ function App() {
         console.log(json);
         let random = Math.floor(Math.random() * json.length);
         // console.log(json[random]);
-        setSolution(json[random].word);
+        let obtainedArray = json;
+        setSolutionArray(obtainedArray);
+        setSolution(obtainedArray[random].word);
       });
   }, [setSolution]);
 
   return (
     <div className="App">
-      <h1 className="wtitle">Wordle</h1>
-      <h2>{solution && <Wordle solution={solution} />}</h2>
+      {/* <h1 className="wtitle">Wordle</h1> */}
+      <Header />
+      <h2>{solution && <Wordle solution={solution} arr={solutionArray} />}</h2>
     </div>
   );
 }

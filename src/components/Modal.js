@@ -1,6 +1,14 @@
-import React from "react";
+import { click } from "@testing-library/user-event/dist/click";
+import React, { useEffect } from "react";
 
-export default function Modal({ turn, isCorrect, solution }) {
+export default function Modal({ turn, isCorrect, modalRemover, solution }) {
+  useEffect(() => {
+    window.addEventListener("click", modalRemover);
+    return () => {
+      window.removeEventListener(("click", modalRemover));
+    };
+  }, []);
+
   return (
     <div className="modal">
       {isCorrect && (

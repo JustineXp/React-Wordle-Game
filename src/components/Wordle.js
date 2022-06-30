@@ -9,7 +9,10 @@ export default function Wordle({ solution }) {
     useWordle(solution);
   const [showModal, setShowModal] = useState(false);
 
-  let word = solution.toLocaleUpperCase();
+  const modalRemover = () => {
+    setShowModal(!showModal);
+    return;
+  };
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
@@ -44,7 +47,12 @@ export default function Wordle({ solution }) {
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
       <Keypad keys={usedKeys} />
       {showModal && (
-        <Modal turn={turn} isCorrect={isCorrect} solution={solution} />
+        <Modal
+          turn={turn}
+          modalRemover={modalRemover}
+          isCorrect={isCorrect}
+          solution={solution}
+        />
       )}
     </div>
   );
